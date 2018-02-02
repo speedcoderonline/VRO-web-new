@@ -1,0 +1,24 @@
+{
+  "name": "new-vro-web",
+  "version": "1.0.0",
+  "description": "VRO web",
+  "main": "server.js",
+  "scripts": {
+    "build-css": "stylus -u nib views\\stylesheets\\ -o static\\css",
+    "watch-css": "stylus -u nib views\\stylesheets\\ -o static\\css -w",
+    "clean": "rd /s /q static\\css && mkdir static\\css",
+    "build": "npm run clean && npm run build-css",
+    "watch": "npm run clean && start npm run watch-css && nodemon server -e js,pug",
+    "start": "node server.js"
+  },
+  "author": "VRO dev",
+  "license": "ISC",
+  "dependencies": {
+    "asyncawait": "^1.0.6",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "nib": "^1.1.2",
+    "pug": "^2.0.0-rc.4",
+    "stylus": "^0.54.5"
+  }
+}
