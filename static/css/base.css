@@ -44,24 +44,3 @@ h2,
 h3 {
   font-family: 'BebasNeue';
 }
-.footer {
-  padding: 10px 0;
-  background: #28825f;
-  font-size: 17px;
-  color: rgba(255,255,255,0.7);
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-}
-.footer .footer-content {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0 30px;
-}
-[data-page="start"] .main-content h1 {
-  color: #28825f;
-}
-[data-page="matsedel"] .main-content h1 {
-  color: #28825f;
-}

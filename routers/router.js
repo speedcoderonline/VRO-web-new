@@ -12,7 +12,8 @@ module.exports = (function() {
 
   var routes = [
     {page:'start', path:'/'},
-    {page:'about'}
+    {page:'about'},
+    {page:'matsedel'}
   ]
   
   // Loop through the routes array and
