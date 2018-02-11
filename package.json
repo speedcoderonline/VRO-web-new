@@ -8,11 +8,11 @@
     "watch-css": "stylus -u nib views/stylesheets/ -o static/css -w",
     "clean": "rm -rf static/css && mkdir -p static/css",
     "build": "npm run clean && npm run build-css",
-    "watch": "npm run clean && npm run watch-css", //npm run watch for localhost IOS
-    "w-watch": "npm run w-clean && npm run w-watch-css",
+    "watch": "npm run clean && npm run watch-css",
+    "w-watch": "npm run w-clean && npm run w-watch-css && nodemon server",
     "start": "npm run build & node server",
     "w-start": "npm run w-build & node server",
-    "w-dev": "start \"\" /B node server && npm run w-watch", //npm run w-dev for localhost windows
+    "w-dev": "start \"\" /B node server && npm run w-watch",
     "w-build": "npm run w-clean && npm run w-build-css",
     "w-build-css": "stylus -u nib views\\stylesheets\\ -o static\\css",
     "w-watch-css": "stylus -u nib views\\stylesheets\\ -o static\\css -w",
