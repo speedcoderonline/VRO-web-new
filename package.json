@@ -10,7 +10,7 @@
     "build": "npm run clean && npm run build-css",
     "watch": "npm run clean && npm run watch-css",
     "w-watch": "npm run w-clean && npm run w-watch-css && nodemon server",
-    "start": "npm run build & node server",
+    "start": "npm run build & npm run watch & node server",
     "w-start": "npm run w-build & node server",
     "w-dev": "start \"\" /B node server && npm run w-watch",
     "w-build": "npm run w-clean && npm run w-build-css",
