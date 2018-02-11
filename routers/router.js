@@ -13,8 +13,11 @@ module.exports = (function() {
   //Array with pages
   var routes = [
     {page:'start', path:'/'},
-    {page:'about'},
-    {page:'matsedel'}
+    {page:'matsedel'},
+    {page:'styrelsen'},
+    {path:'styrelsen/:name',page:'styrelsen-roll', dataGen: req=>{
+      return {styrelsen:req.params.name}
+    }},
   ]
   
   // Loop through the routes array and

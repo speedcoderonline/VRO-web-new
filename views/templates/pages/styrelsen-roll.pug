@@ -1,0 +1,7 @@
+extends ../index
+block mainContent
+	
+	script.
+		firebase.database().ref('structure/styrelsen/' + subpage).once("value", function(snapshot) {
+			alert(snapshot.child('mission').val())
+		})

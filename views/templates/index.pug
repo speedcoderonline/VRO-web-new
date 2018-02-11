@@ -5,18 +5,20 @@ html
 
 		link(rel='stylesheet' type='text/css' href='/css/coat.css')
 
+		script(src='/javascript/general.js')
+
 		script(src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js")
 		script.
-		  // Initialize Firebase
-		  var config = {
-		    apiKey: "AIzaSyCsw0zGUHgtaA0K4oPkAshIutfdEpyn31c",
-		    authDomain: "vro-web.firebaseapp.com",
-		    databaseURL: "https://vro-web.firebaseio.com",
-		    projectId: "vro-web",
-		    storageBucket: "vro-web.appspot.com",
-		    messagingSenderId: "902824305582"
-		  }
-		  firebase.initializeApp(config)
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyCsw0zGUHgtaA0K4oPkAshIutfdEpyn31c",
+				authDomain: "vro-web.firebaseapp.com",
+				databaseURL: "https://vro-web.firebaseio.com",
+				projectId: "vro-web",
+				storageBucket: "vro-web.appspot.com",
+				messagingSenderId: "902824305582"
+			}
+			firebase.initializeApp(config)
 
 	body(data-page=dataPage)
 		.main-content

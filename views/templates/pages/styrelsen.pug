@@ -1,0 +1,10 @@
+extends ../index
+block mainContent
+
+	script.
+		firebase.database().ref('structure/styrelsen').once("value", function(snapshot) {
+			snapshot.forEach(function(role){
+				console.log(role.val())
+				console.log(role.key)
+			})
+		})
