@@ -62,6 +62,20 @@ h3 {
 [data-page="start"] .main-content h1 {
   color: #28825f;
 }
-[data-page="matsedel"] .main-content h1 {
-  color: #28825f;
+[data-page="matsedel"] .main-content,
+[data-page="matsedel"] .headerDiv {
+  height: 457px;
+  width: 1667px;
+  overflow: hidden;
+}
+[data-page="matsedel"] .main-content .header-image,
+[data-page="matsedel"] .headerDiv .header-image {
+  height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-image: url("images/food-header.jpeg");
+  background-repeat: no-repeat;
+  filter: blur(4px) brightness(60%);
 }
