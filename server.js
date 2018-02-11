@@ -24,6 +24,31 @@ app.use(express.static('static'))
 var router = require('./routers/router.js')
 app.use(router)
 
+
+
+
+//Food API
+const foodFunction = require('./api/functions/food.js')
+
+app.get('/api/food', getFood)
+
+function getFood(req, res){
+
+	const foodCallback = function(rawFoodData){
+		res.send(foodFunction.parseFoodData(rawFoodData))
+	}
+
+	foodFunction.fetchRawFoodData((err, data)=> {
+		foodCallback(data)
+	})
+
+
+}
+
+
+
+
+
 // Declaring Port
 const port = process.env.PORT || 8000
 

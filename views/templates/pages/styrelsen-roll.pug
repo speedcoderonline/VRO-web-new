@@ -1,7 +1,22 @@
 extends ../index
 block mainContent
-	
+
+	#role
+	#name
+	#description
+	img#image
+
 	script.
+		var roleDiv = document.querySelector('#role')
+		var nameDiv = document.querySelector('#name')
+		var descriptionDiv = document.querySelector('#description')
+
 		firebase.database().ref('structure/styrelsen/' + subpage).once("value", function(snapshot) {
-			alert(snapshot.child('mission').val())
+			roleDiv.innerHTML = snapshot.child('mission').val()
+			nameDiv.innerHTML = snapshot.child('name').val()
+			descriptionDiv.innerHTML = snapshot.child('description').val()
+		})
+
+		firebase.storage().ref('structure/styrelsen/' + subpage + '.jpg').getDownloadURL().then(function(url) {
+			document.querySelector('#image').src = url
 		})

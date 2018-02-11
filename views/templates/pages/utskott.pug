@@ -1,0 +1,10 @@
+extends ../index
+block mainContent
+
+	script.
+		firebase.database().ref('structure/utskott').once("value", function(snapshot) {
+			snapshot.forEach(function(committee){
+				console.log(committee.val())
+				console.log(committee.key)
+			})
+		})

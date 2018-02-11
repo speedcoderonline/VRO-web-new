@@ -15,8 +15,12 @@ module.exports = (function() {
     {page:'start', path:'/'},
     {page:'matsedel'},
     {page:'styrelsen'},
-    {path:'styrelsen/:name',page:'styrelsen-roll', dataGen: req=>{
+    {page:'styrelsen-roll',path:'styrelsen/:name', dataGen: req=>{
       return {styrelsen:req.params.name}
+    }},
+    {page:'utskott'},
+    {page:'utskott-sida',path:'utskott/:name', dataGen: req=>{
+      return {utskott:req.params.name}
     }},
   ]
   

@@ -1,0 +1,17 @@
+extends ../index
+block mainContent
+
+	h1#name
+	#description
+	h4#president
+
+	script.
+		var nameDiv = document.querySelector('#name')
+		var descriptionDiv = document.querySelector('#description')
+		var presidentDiv = document.querySelector('#president')
+
+		firebase.database().ref('structure/utskott/' + subpage).once('value', function(snapshot){
+			nameDiv.innerHTML = snapshot.child('name').val()
+			descriptionDiv.innerHTML = snapshot.child('description').val()
+			presidentDiv.innerHTML = snapshot.child('president').val() + ' är ordförande'
+		})

@@ -5,3 +5,9 @@ block mainContent
 		.header-text MATSEDEL
 		.header-image
   
+			script.
+				serverData(
+					'/api/food', 
+					function(data) { console.log(data); },
+					function(xhr) { console.error(xhr); }
+				)
