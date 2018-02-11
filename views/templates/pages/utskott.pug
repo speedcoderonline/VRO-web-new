@@ -1,10 +1,13 @@
 extends ../index
 block mainContent
 
+	.links
+
 	script.
 		firebase.database().ref('structure/utskott').once("value", function(snapshot) {
 			snapshot.forEach(function(committee){
 				console.log(committee.val())
 				console.log(committee.key)
+				document.querySelector('.links').innerHTML += '<a href="/utskott/' + committee.key + '">' + committee.val().name + '</a><br>'
 			})
 		})
