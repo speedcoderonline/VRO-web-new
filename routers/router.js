@@ -9,7 +9,8 @@ const await = require('asyncawait/await');
 module.exports = (function() {
   var router = express.Router();
   // ---------------------------
-
+  
+  //Array with pages
   var routes = [
     {page:'start', path:'/'},
     {page:'about'},

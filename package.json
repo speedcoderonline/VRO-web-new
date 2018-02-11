@@ -4,12 +4,19 @@
   "description": "VRO web",
   "main": "server.js",
   "scripts": {
-    "build-css": "stylus -u nib views\\stylesheets\\ -o static\\css",
-    "watch-css": "stylus -u nib views\\stylesheets\\ -o static\\css -w",
-    "clean": "rd /s /q static\\css && mkdir static\\css",
+    "build-css": "stylus -u nib views/stylesheets/ -o static/css",
+    "watch-css": "stylus -u nib views/stylesheets/ -o static/css -w",
+    "clean": "rm -rf static/css && mkdir -p static/css",
     "build": "npm run clean && npm run build-css",
-    "watch": "npm run clean && start npm run watch-css && nodemon server -e js,pug",
-    "start": "node server.js"
+    "watch": "npm run clean && npm run watch-css", //npm run watch for localhost IOS
+    "w-watch": "npm run w-clean && npm run w-watch-css",
+    "start": "npm run build & node server",
+    "w-start": "npm run w-build & node server",
+    "w-dev": "start \"\" /B node server && npm run w-watch", //npm run w-dev for localhost windows
+    "w-build": "npm run w-clean && npm run w-build-css",
+    "w-build-css": "stylus -u nib views\\stylesheets\\ -o static\\css",
+    "w-watch-css": "stylus -u nib views\\stylesheets\\ -o static\\css -w",
+    "w-clean": "rd /s /q static\\css && mkdir static\\css"
   },
   "author": "VRO dev",
   "license": "ISC",
