@@ -3,19 +3,27 @@
 		
 	.headerDiv
 		height 457px
-		width 1667px
+		width 100%
 		overflow hidden
+		position relative
 		.header-image
 			height 100%
 			width 100%
-			background-size cover
+			background-size 102%
 			background-image url('images/food-header.jpeg')
 			background-repeat no-repeat
 			filter: blur(4px) brightness(60%)
-				.header-text 
-			height 849px
-			width 183px
+			position absolute
+			transform translate(-50%, -53px) scale(1.05)
+			left 50%
+			top 0
+			
+		.header-text 
 			font-family bebas
 			font-size 130px		
 			color #ffffff
-
+			z-index 10
+			position absolute
+			transform translate(-50%, -50%)
+			top 50%
+			left 50%
