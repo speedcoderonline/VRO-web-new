@@ -1,0 +1,84 @@
+[data-page='styrelsen']
+	
+	h1.page-header
+		text-align center
+		margin-top 40px
+	.links
+		text-align center
+		max-width 1200px
+		margin auto
+		.card
+			min-width 250px
+			display inline-block
+			margin 50px 20px
+			cursor pointer
+			border-radius 10px
+			padding 25px 0
+			&:hover
+				box-shadow 0 0 20px rgba(black, .15)
+			.image
+				height 200px
+				width 200px
+				margin auto
+				margin-bottom 25px
+				background rgba(black, .05)
+				border-radius 100%
+			.role-text
+				text-align center
+	.overlay
+		max-width 0
+		overflow hidden
+		position fixed
+		top 0
+		left 0
+		width 100%
+		height 100%
+		transition .08s ease
+		background rgba(black, .45)
+		opacity 0
+		z-index 5
+	.dark-overlay
+		opacity 1
+		max-width none
+	.info
+		width 600px
+		background white
+		padding 45px
+		border-radius 5px
+		position fixed
+		z-index 10
+		left calc(50% - 300px)
+		transform-origin 10px 10px
+		top -400px
+		h2
+			margin-bottom 10px
+	.drop
+		animation drop 0.5s ease forwards
+	@keyframes drop{
+		0%{
+			opacity 0
+		}
+		45%{
+			top calc(40% - 160px)
+		}
+		70%{
+			top calc(34% - 160px) 
+		}
+		100%{
+			top calc(37% - 160px)
+			opacity 1
+		}
+	}
+	.fall
+		animation fall .8s ease forwards
+	@keyframes fall{
+		0%{
+			top calc(37% - 160px)
+		}
+		45%{
+			opacity 0
+		}
+		100%{
+			opacity 0
+		}
+	}
