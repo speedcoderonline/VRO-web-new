@@ -1,13 +1,39 @@
 extends ../index
 block mainContent
 
+	h1.page-header Styrelsen
 	.links
+	.overlay(onclick='hideRoleInfo(this)')
+	.info
 
 	script.
 		firebase.database().ref('structure/styrelsen').once("value", function(snapshot) {
 			snapshot.forEach(function(role){
 				console.log(role.val())
 				console.log(role.key)
-				document.querySelector('.links').innerHTML += '<a href="/styrelsen/' + role.key + '">' + role.val().name + '</a><br>'
+
+				const roleText = '<h3>' + role.val().mission + '</h3> <h5>' + role.val().name + '</h5>'
+				document.querySelector('.links').innerHTML += '<div class="card" onclick="getRoleInfo(\'' + role.key + '\')"> <div class="image"></div> <div class="role-text">' + roleText + '</div> </div>'
 			})
 		})
+		function getRoleInfo(role){
+			firebase.database().ref('structure/styrelsen/'+role).once('value', function(snapshot){
+				var infoDiv = document.querySelector('.info')
+				infoDiv.innerHTML = '<h2>' + snapshot.child('mission').val() + '</h2><h4>' +  snapshot.child('name').val() + '</h4><br>' + snapshot.child('description').val()
+			})
+			document.querySelector('.overlay').classList.add('dark-overlay')
+			setTimeout(
+			function(){
+				document.querySelector('.info').classList.add('drop')
+			},150)
+		}
+		function hideRoleInfo(e){
+			var infoDiv = document.querySelector('.info')
+			infoDiv.classList.remove('drop')
+			infoDiv.classList.add('fall')
+			setTimeout(
+			function(){
+				e.classList.remove('dark-overlay')
+				infoDiv.classList.remove('fall')
+			}, 800)
+		}
