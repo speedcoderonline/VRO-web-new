@@ -1,0 +1,81 @@
+body
+	
+// Signed in header and nav
+	
+	header.topbar
+		z-index 20
+		position fixed
+		padding 20px 50px
+		background $darkgreen
+		width 100%
+		box-sizing border-box
+		display flex
+		align-items center
+		
+		h2.signed-in-heading
+			flex 1
+			text-align center
+		
+	aside.sidebar
+		z-index 10
+		position fixed
+		width 250px
+		height 100%
+		padding-top 90px
+		box-sizing border-box
+		background $middlegreen
+		
+		nav
+			padding 15px 0
+			a 
+				display block
+				padding 15px 30px
+				font-size 160%
+				
+				&:hover
+					background rgba(white, .1)
+	.main-content
+		width 100%
+		box-sizing border-box
+		position relative
+		
+	.main-content.signed-in
+		padding-left 250px
+		padding-top 90px
+		min-height 100vh
+		background $green
+		
+
+// Signed out header and nav
+
+	.nav-header
+		position absolute
+		top 0
+		left 0
+		width 100%
+		z-index 100
+		box-sizing border-box
+		display flex
+		justify-content stretch
+		align-items center
+		padding 10px 60px
+		
+		.link-logo
+			box-shadow 0 3px 20px rgba(black, .2)
+			border-radius 100%
+		
+		nav
+			display flex
+			align-items center
+			justify-content center
+			flex 1
+			a
+				padding 20px 40px
+				
+		nav a, #header-sign-in
+			font-weight bold
+			font-size 170%
+			font-family 'BebasNeue'
+			cursor pointer
+			&:hover
+				opacity .8

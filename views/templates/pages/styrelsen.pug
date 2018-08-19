@@ -12,20 +12,31 @@ block mainContent
 				console.log(role.val())
 				console.log(role.key)
 
+				//- const image = function(){
+				//- 	var imgUrl
+				//- 	firebase.storage().ref('structure/styrelsen/' + role.key + '.jpg').getDownloadURL().then(function(url){
+				//- 		imgUrl = url
+				//- 	})
+				//- 	return '<img src="' + imgUrl + '"class="image">'
+				//- }
 				const roleText = '<h3>' + role.val().mission + '</h3> <h5>' + role.val().name + '</h5>'
-				document.querySelector('.links').innerHTML += '<div class="card" onclick="getRoleInfo(\'' + role.key + '\')"> <div class="image"></div> <div class="role-text">' + roleText + '</div> </div>'
+				document.querySelector('.links').innerHTML += '<div class="card" onclick="getRoleInfo(\'' + role.key + '\')"> <img id="' + role.key + '" class="image"><div class="role-text">' + roleText + '</div> </div>'
+				firebase.storage().ref('structure/styrelsen/' + role.key + '.jpg').getDownloadURL().then(function(url){
+					document.querySelector('#' + role.key).style.backgroundImage = 'url(' + url + ')'
+				})
 			})
 		})
 		function getRoleInfo(role){
 			firebase.database().ref('structure/styrelsen/'+role).once('value', function(snapshot){
 				var infoDiv = document.querySelector('.info')
 				infoDiv.innerHTML = '<h2>' + snapshot.child('mission').val() + '</h2><h4>' +  snapshot.child('name').val() + '</h4><br>' + snapshot.child('description').val()
+			}).then(function(){
+				document.querySelector('.overlay').classList.add('dark-overlay')
+				setTimeout(
+				function(){
+					document.querySelector('.info').classList.add('drop')
+				},150)
 			})
-			document.querySelector('.overlay').classList.add('dark-overlay')
-			setTimeout(
-			function(){
-				document.querySelector('.info').classList.add('drop')
-			},150)
 		}
 		function hideRoleInfo(e){
 			var infoDiv = document.querySelector('.info')

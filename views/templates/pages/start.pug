@@ -1,4 +1,98 @@
 extends ../index
+
+block pageStatus
+	- var signedOutPage = true;
+
 block mainContent
 
-	h1 hello
+	//- button(onclick='logoutMemmber()') Logga ut
+
+	header
+		video.background-video(poster='images/thumbnail.jpg' playbackRate='3.0' autoplay loop muted)
+			source(src='#')
+
+		.header-content
+			h1 Vår vision är att göra din skoltid bättre
+			.btn-wrapper
+				a Om kåren
+				#sign-in(onclick='loginMember()') Logga in
+
+		.banner
+			h3 Sveriges Bästa Elevkår 2017
+			img(src='icons/gold-clip.png')
+
+	section.section-1
+		.video-wrapper
+			h2 Se filmen för att få en känsla av kårandan!
+			video.section-video(controls)
+				source(src='videos/annual-2018.mp4')
+		.text-wrapper
+			p Viktor Rydberg Odenplans Elevkår är Viktor Rydberg Gymnasium Odenplans största förening, till vilken nästan 100 % av skolans elever aktivt valt att ansluta sig. Elevkåren samlar och engagerar elever från alla årskurser, program och klasser för att tillsammans förgylla skoltiden för kårens medlemmar. För oss i kåren är målet enkelt: medlemmarna ska leva sin gymnasietid, inte bara överleva den.
+
+			p Vår vision är kort och konkret: Viktor Rydberg Odenplans Elevkår ska vara den bästa elevkåren för kårens medlemmar. Detta åstadkommer vi genom flertalet aktiviteter och arrangemang inom kategorierna service, event, bildning och lobbying. 
+
+			p Vår elevkår startades år 2012 av Hedda Tingskog. Kårens nuvarande ordförande är Jacob Tilly.
+
+	section.sm-banner
+		h2 Besök våra sociala kanaler!
+		.sm-wrapper
+			#instagram
+				img(src='icons/instagram-icon-green.png')
+				p vroelevkar
+			#snapchat
+				img(src='icons/snapchat-icon-green.png')
+				p vroelevkar
+			#twitter
+				img(src='icons/twitter-icon-green.png')
+				p vroelevkar
+			#facebook
+				img(src='icons/facebook-icon-green.png')
+				p Viktor Rydberg<br>Odenplans Elevkår
+			#youtube
+				img(src='icons/youtube-icon-green.png')
+				p Viktor Rydberg<br>Odenplans Elevkår
+	section.section-2
+	script.
+		function loginMember(){
+			var provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithRedirect(provider);
+		}
+		firebase.auth().onAuthStateChanged(user => {
+			if(user){
+				user.providerData.forEach(function(profile){
+					dbPull('students', function(snapshot){
+						var emailApproved = false
+						var member = false
+						snapshot.forEach(function(student){
+							profileEmail = profile.email.replace(/\./g,'%2E')
+							if(student.key === profileEmail){
+								console.log('Success')
+								emailApproved = true
+							}else{
+								alert('Din mailadress är inte registrerad hos oss. Om det är ett misstag, kontakta oss på odenplanselevkar@vrg.se')
+							}
+							if(student.val().member){
+								member = true
+							}
+						})
+						if(emailApproved){
+							console.log('Logged in')
+							if(member){
+								window.location.href = '/user'
+							}else{
+								window.location.href = '/new-user'
+							}
+						}else{
+							console.log('Login failed')
+							user = firebase.auth().currentUser
+							user.delete().then(function(){
+								console.log('User deleted')
+							})
+
+						}
+					})
+				})
+			}else{
+				console.log('Logged out')
+			}
+		})

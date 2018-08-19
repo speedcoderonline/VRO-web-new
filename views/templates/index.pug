@@ -3,11 +3,15 @@ html
 	head
 		title #{title}
 
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+
 		link(rel='stylesheet' type='text/css' href='/css/coat.css')
 
 		script(src='/javascript/general.js')
 
+		//- Jquery
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		//- Firebase
 		script(src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js")
 		script.
 			// Initialize Firebase
@@ -22,7 +26,40 @@ html
 			firebase.initializeApp(config)
 
 	body(data-page=dataPage)
-		.main-content
-			block mainContent
-		.footer
-			.footer-content Skapat av bland annat Sebastian och lite Jacob ibland
+		block pageStatus
+		if !signedOutPage
+			header.topbar
+				a(href='/').link-logo
+				h2.signed-in-heading God morgon Sebastian
+				.settings(onclick='logoutMember()') o
+
+			aside.sidebar
+				nav.signed-in-nav
+					a Matsedeln
+					a Klasspokalen
+					a Kommittéer
+					a Om kåren
+					a Kalendarium
+
+			.main-content.signed-in
+				block mainContent
+				#spinner.page-overlay
+					img.inner-spinner(src='images/spinner.png')
+					img.outer-spinner(src='images/spinner.png')
+
+		else
+			.nav-header
+				a(href='/').link-logo
+				nav
+					a(href='/contact') Kontakt
+				#header-sign-in(onclick='loginMember()') Logga in
+			.main-content
+				block mainContent
+			footer
+				include elements/footer-content
+		script.
+			firebase.auth().onAuthStateChanged(function(user){
+				if(user){
+					_('spinner').classList.add('hidden')
+				}
+			})

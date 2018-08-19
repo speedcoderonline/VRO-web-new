@@ -1,0 +1,17 @@
+[data-page='create-group']
+	
+	h1
+		color red
+	
+	form.create-group-form
+		input[name='colorChoice']
+			opacity 0
+			position absolute
+		label.color-container
+			background red
+			margin 5px
+			padding-left 35px
+			font-size 22px
+			cursor: pointer
+		input:checked + .color-container
+			border 1px solid black

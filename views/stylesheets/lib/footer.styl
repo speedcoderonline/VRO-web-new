@@ -1,11 +1,36 @@
 //Footer stylus
 
-.footer
-	padding 10px 0
-	background $green
+footer
+	padding 0
+	background $darkgreen
 	font-size 17px
 	color rgba(white, .7)
 	width 100%
+		
 	.footer-content
 		box-sizing border-box
-		padding 0 30px
+		padding 50px 80px
+		display flex
+		p, a
+			font-size 90%
+			margin-bottom 20px
+			clear both
+			float left
+		h6
+			font-size 130%
+			font-weight bold
+			margin-bottom 30px
+		.left-content
+			flex 2
+			.link-logo
+				margin-bottom 20px
+		.middle-content
+			flex 1
+		.right-content
+			flex 1
+	.lower-footer
+		text-align center
+		padding 30px 0
+		background rgba(white, .05)
+		p
+			font-size 90%

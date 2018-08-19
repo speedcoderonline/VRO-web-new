@@ -1,0 +1,70 @@
+extends ../index
+block mainContent
+
+	.header-color
+	header.header-e 
+		h1.header-e__header Skapa kommitté
+
+	form.create-group-form(method='POST' action='/interest-groups/create-group' name='createform')
+		label(for='groupName') Namn kommitté
+		br
+		input(type='text' name='groupName')
+		br
+		label(for='groupDesc') Bekrivning kommitté
+		br
+		textarea(type='text' name='groupDesc')
+		br
+		label(for='groupPresident') Namn ordförande
+		br
+		input(type='text' name='groupPresident')
+		br
+		label(for='colorChoice') Färg
+		br
+		//- Red
+		input(type='radio' name='colorChoice' value='red' id='red' checked)
+		label(for='red').color-container#red
+		//- Yellow
+		input(type='radio' name='colorChoice' value='yellow' id='yellow')
+		label(for='yellow').color-container#yellow
+		//- Green
+		input(type='radio' name='colorChoice' value='green' id='green')
+		label(for='green').color-container#green
+		//- Blue
+		input(type='radio' name='colorChoice' value='blue' id='blue')
+		label(for='blue').color-container#blue
+		//- Purple
+		input(type='radio' name='colorChoice' value='purple' id='purple')
+		label(for='purple').color-container#purple
+		//- Pink
+		input(type='radio' name='colorChoice' value='pink' id='pink')
+		label(for='pink').color-container#pink
+		//- Brown
+		input(type='radio' name='colorChoice' value='brown' id='brown')
+		label(for='brown').color-container#brown
+		//- Black
+		input(type='radio' name='colorChoice' value='black' id='black')
+		label(for='black').color-container#black
+		br
+		input(type='submit')
+
+		//- namn, beskrivning, ordförande, färg, bild, 
+	script.
+		createform.querySelectorAll('label.color-container').forEach(function(e){
+			e.style.background = e.id
+		})
+
+		createform.onsubmit = function(){
+			if(createform.groupName.value === ''){
+				alert('Fyll i namnet på kommittén!')
+				createform.groupName.focus()
+				return false
+			}else if(createform.groupDesc.value === ''){
+				alert('Fyll beskrivning av kommittén!')
+				createform.groupDesc.focus()
+					return false
+			}else if(createform.groupPresident.value === ''){
+				alert('Fyll i ordförande för kommittén´!')
+				createform.groupPresident.focus()
+				return false
+			}
+		}

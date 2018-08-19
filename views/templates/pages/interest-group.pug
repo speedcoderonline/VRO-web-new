@@ -1,0 +1,194 @@
+extends ../index
+block mainContent
+
+	.header-color
+	.header
+		.image-wrapper
+			.image#image
+			.color-overlay
+		.group-info
+			h1.group-name#name
+	.body
+		section.main
+			article.description
+				p#description
+				h5.president#president
+
+			.image-updates
+				//- .image-post
+
+		aside.updates
+
+	script.
+		//Declaring variables
+
+		var nameDiv = document.querySelector('#name')
+		var descriptionDiv = document.querySelector('#description')
+		var presidentDiv = document.querySelector('#president')
+		var mainDiv = document.querySelector('.main')
+		var themeColor
+
+		//Function for transforming a hexadecimal color value to rgb
+
+		function hexToRgb(hex){
+			var color = hex
+			if(color[0] === '#'){
+				color = color.slice(1)
+			}
+			var bigint = parseInt(color, 16);
+			var r = (bigint >> 16) & 255;
+			var g = (bigint >> 8) & 255;
+			var b = bigint & 255;
+
+			return r + "," + g + "," + b;
+		}
+
+		//Dynamically adding text on page
+
+		firebase.database().ref('structure/interest-groups/' + subpage).once("value", function(snapshot) {
+			nameDiv.innerHTML = snapshot.child('name').val()
+			descriptionDiv.innerHTML = snapshot.child('description').val()
+			presidentDiv.innerHTML = snapshot.child('president').val() + ' är ordförande'
+
+			//Main color
+
+			themeColor = snapshot.val().color
+			document.querySelector('.header-color').style.background = 'linear-gradient(' + themeColor + ', white)'
+			document.querySelector('.color-overlay').style.background = 'rgba(' + hexToRgb(themeColor) + ', .4)'
+			firebase.storage().ref('structure/interest-groups/' + snapshot.key + '/main/' + snapshot.val().image).getDownloadURL().then(function(url){
+				document.querySelector('#image').style.backgroundImage = 'url(' + url + ')'
+			})
+
+			//Body height
+
+			document.querySelector('.body').style.minHeight = mainDiv.scrollHeight + 'px'
+		}).then(function(){
+			firebase.auth().onAuthStateChanged(user => {
+				var isMember = false
+				firebase.database ().ref('structure/interest-groups/' + subpage + '/members').once('value', function(snapshot){
+					snapshot.forEach(function(member){
+						if(member.val().email === user.email){
+							isMember = true
+						}
+					})
+				}).then(function(){
+					var groupInfo = document.querySelector('.group-info')
+					var groupBtn = document.createElement('button')
+					groupBtn.classList.add('group-button')
+					groupBtn.style.background = themeColor
+					groupInfo.appendChild(groupBtn)
+
+					groupBtn = document.querySelector('.group-button')
+
+					var userEmail = user.email.replace(/\./g, '%2E')
+
+					if(isMember){
+						groupBtn.innerHTML = 'Avsluta medlemsskap'
+
+						groupBtn.addEventListener('click', function(){
+							firebase.database().ref('students/' + userEmail).once('value', function(snapshot){
+								var currentUser = snapshot.val()
+								var email = currentUser.email
+								var urlPath = '/interestGroups/removeMember/' + subpage + '/' + email
+								serverData(
+									urlPath,
+									function(data){
+										console.log('success')
+										location.reload()
+									},
+									function(xhr){
+										console.error(xhr)
+									}
+								)
+							})
+						})
+					}else{
+						groupBtn.innerHTML = 'Gå med'
+
+						groupBtn.addEventListener('click', function(){
+							firebase.database().ref('students/' + userEmail).once('value', function(snapshot){
+								var currentUser = snapshot.val()
+								var name = currentUser.firstName + ' ' + currentUser.lastName
+								var email = currentUser.email
+								var obj = {name:name, email:email}
+								var objString = JSON.stringify(obj)
+								var urlPath = '/interestGroups/addMember/' + subpage + '/' + objString
+								serverData(
+									urlPath,
+									function(data){
+										console.log('success')
+										location.reload()
+									},
+									function(xhr){
+										console.error(xhr)
+									}
+								)
+							})
+						})
+					}
+				})
+			})
+		})
+
+		//Update posts
+
+		var postDates = []
+		firebase.database().ref('structure/interest-groups/' + subpage + '/update-posts').once('value',function(snapshot){
+			snapshot.forEach(function(post){
+				postDates.push(post.val())
+			})
+			if(postDates.length === 0){
+				document.querySelector('.updates').innerHTML = '<h4>Inga uppdateringar från kommittén</h4>'
+			}
+		}).then(function(){
+			postDates.sort(function(a, b) {
+				var dateA = new Date(a.date), dateB = new Date(b.date);
+				return dateA - dateB;
+			}).forEach(function(post){
+				var updatesDiv = document.querySelector('.updates')
+				var updatePost = document.createElement('div')
+				updatePost.classList.add('update-post')
+				updatePost.style.background = 'rgba(' + hexToRgb(themeColor) + ', .08)'
+				updatePost.style.border = '1px solid rgba(' + hexToRgb(themeColor) + ', .1)'
+
+				var postHeader = document.createElement('h5')
+				postHeader.classList.add('post-header')
+				postHeader.innerHTML = post.name
+
+				var postText = document.createElement('p')
+				postText.classList.add('post-text')
+				postText.innerHTML = post.message
+
+				//Function that returns current date in numbers
+
+				var getPostDate = function(){
+					var date = new Date(post.date)
+
+					var hour = date.getHours()
+					var minutes = date.getMinutes()
+
+					var day = date.getDate()
+					if(day.toString().length === 1){
+						day = '' + 0 + day
+					}
+
+					var month = date.getMonth() + 1
+					if(month.toString().length === 1){
+						month = '' + 0 + month
+					}
+
+					var year = date.getFullYear()
+
+					return day + '-' + month + '-' + year
+				}
+
+				var postDate = document.createElement('h6')
+				postDate.classList.add('post-date')
+				postDate.innerHTML = getPostDate()
+
+				updatePost.appendChild(postHeader)
+				updatePost.appendChild(postText)
+				updatePost.appendChild(postDate)
+				updatesDiv.appendChild(updatePost)
+			});
+		})

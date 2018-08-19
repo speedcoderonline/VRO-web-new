@@ -1,0 +1,70 @@
+[data-page='new-user']
+	
+	.main-content
+		background $green
+		height 100vh
+		display flex
+		justify-content center
+		
+		.page-content
+			margin-top 140px
+			text-align center
+			background rgba(white, .04)
+			border-radius 20px
+			align-self start
+			padding 80px 120px
+			box-sizing border-box
+			max-width 90%
+			
+			p
+				margin-bottom 20px
+				font-size 140%
+				
+			p:nth-child(2)
+				margin-bottom 60px
+
+			.authed-btn
+				margin auto
+				
+			#sign-out
+				margin-top 20px
+				cursor pointer
+				color rgba(white, .6)
+				
+		.main-logo
+			position absolute
+			transform translateX(-50%)
+			bottom 40px
+			left 50%
+				
+	footer
+		display none
+		
+
+	@media(max-width 500px)
+	
+		header.topbar
+			padding 20px
+			
+			h2
+				font-size 150%
+				
+		.main-content
+			
+			.page-content
+				margin-top 100px
+				padding 60px 20px
+				
+				p
+					font-size 110%
+				
+				.authed-btn
+					font-size 120%
+					width 150px
+					padding 10px
+					
+				#sign-out
+					font-size 90%
+			.main-logo
+				height 80px
+				width 80px

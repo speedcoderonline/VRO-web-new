@@ -1,5 +1,105 @@
 [data-page="start"]
 	
 	.main-content
-		h1
-			color $green
+		background #FAFAFA
+		h2
+			font-size 200%
+			color black
+		p
+			color black
+		header
+			height 600px
+			position relative
+			*
+				text-shadow 0 3px 20px rgba(black, .2)
+				z-index 10
+			video.background-video
+				position absolute
+				width 100%
+				height 100%
+				object-fit cover
+				z-index 1
+			.header-content
+				text-align center
+				position absolute
+				transform translate(-50%, -50%)
+				top 50%
+				left 50%
+				width 100%
+				.btn-wrapper
+					display flex
+					justify-content center
+					margin-top 60px
+					a, #sign-in
+						font-weight bold
+						font-size 170%
+						font-family 'BebasNeue'
+						cursor pointer
+						padding 10px
+						width 180px
+						border 4px solid white
+						margin 0 40px
+						box-shadow 0 3px 20px rgba(black, .2)
+						&:hover
+							opacity .8
+			.banner
+				background white
+				border-radius 20px
+				padding 30px 40px
+				padding-bottom 20px
+				position absolute
+				transform translate(-50%, 50%)
+				bottom 0
+				left 50%
+				text-align center
+				box-shadow 0 3px 20px rgba(black, .2)
+				h3
+					color black
+					text-shadow none
+					font-size 180%
+					margin-bottom 10px
+				img
+					height 50px
+					
+		.section-1
+			padding 100px 0
+			width 90% 
+			margin auto
+			display flex
+			align-items center
+			justify-content space-between
+			.video-wrapper
+				h2
+					margin-bottom 20px
+				video.section-video
+					width 700px
+					height auto
+			.text-wrapper
+				margin-left 80px
+				p
+					margin-bottom 20px
+					font-size 120%
+		section.sm-banner
+			padding 60px 0
+			background white
+			box-shadow 0 0 20px rgba(black, .05)
+			text-align center				
+			h2
+				margin-bottom 40px
+			.sm-wrapper
+				display flex
+				width 90%
+				max-width 1200px
+				margin auto
+				div
+					flex 1
+					cursor pointer
+					&:hover
+						opacity .9
+					img
+						width 60px
+						margin-bottom 5px
+					p
+						color $green
+		.section-2
+			height 400px

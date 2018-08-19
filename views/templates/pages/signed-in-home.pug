@@ -1,0 +1,67 @@
+extends ../index
+
+block mainContent
+	
+	.daily-message Du vet väl att det är försäljning till insparken idag?
+
+	.module-grid
+		.module#upcomming
+			.header-section
+				h3 Karnevalen
+				h4 Om 4 dagar
+			p Snart är det dags för den efterlängtade karnevalen! Det kommer att finnas god mat, roliga aktiviteter och kanske dyker till och med skolans egna grillmästare upp... Det här vill du inte missa!
+
+		.module#menu
+			.header-section
+				h3 Matsedel
+			.menu-section#today
+				h4 Idag
+				.menu-display
+					p#main Köttbullar med brunsås och lingonsylt serveras med kokt potatis.
+					p#veg Vegetariska köttbullar med brunsås och lingonsylt serveras med kokt potatis
+
+			.menu-section#tomorrow
+				h4 Imorgon
+				.menu-display
+					p#main Köttbullar med brunsås och lingonsylt serveras med kokt potatis.
+					p#veg Vegetariska köttbullar med brunsås och lingonsylt serveras med kokt potatis
+
+		.module#whistle
+			.header-section
+				h3 Visselpipan
+
+			a#chat Chatta med styrelsen
+			a#message Skicka ett förslag
+
+	script.
+		function authenticateMember(){
+			var authenticatedMember = undefined
+			var userEmail;
+			firebase.auth().onAuthStateChanged(user => {
+				if(user){
+					user.providerData.forEach(profile =>{
+						userEmail = profile.email.replace(/\./g,'%2E')
+						dbPull('students/' + userEmail, student => {
+							if(student.val().member){
+								authenticatedMember = true
+							}else{
+								authenticatedMember = false
+							}
+							console.log(authenticatedMember)
+						})
+					})
+				}else{
+					authenticatedMember = false
+				}
+			})
+			if(authenticatedMember != undefined){
+				console.log(authenticatedMember)
+				return authenticatedMember
+			}
+		}
+
+		if(authenticateMember()){
+			console.log('hurray')
+		}else{
+			console.log('uuuuuuuuh')
+		}

@@ -1,0 +1,27 @@
+extends ../index
+
+block pageStatus
+	- var signedOutPage = true;
+
+block mainContent
+
+	header.topbar
+		h2.signed-in-heading Viktor Rydberg Odenplans Elevkår
+
+	.page-content
+
+		p Du är ännu inte medlem i Sveriges Bästa Elevkår!
+		p Vill du ändra på det?
+
+		.authed-btn Bli medlem
+
+		#sign-out Logga ut
+
+	.main-logo
+
+	script.
+		//- if(auth()){
+		//- 	console.log('yey')
+		//- }else{
+		//- 	console.log('hey')
+		//- }

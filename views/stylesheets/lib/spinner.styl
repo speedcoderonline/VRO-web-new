@@ -1,0 +1,39 @@
+@keyframes outerSpinner
+	from
+		transform: translate(-50%, -50%) rotate(360deg)
+	to
+		transform: translate(-50%, -50%) rotate(0deg)
+		
+@keyframes innerSpinner
+	from
+		transform: translate(-50%, -50%) rotate(0deg)
+	to
+		transform: translate(-50%, -50%) rotate(360deg)
+
+
+.hidden
+	display none
+	
+.page-overlay
+	position fixed
+	top 0
+	left 0
+	width inherit
+	height 100%
+	background $green
+	z-index 5
+	
+	img
+		position fixed
+		transform translate(-50%, -50%)
+		top 50%
+		left 50%
+		display none //Still here for future use
+		
+	.outer-spinner
+		height 80px
+		animation outerSpinner 1.5s infinite linear
+		
+	.inner-spinner
+		height 50px
+		animation innerSpinner 1.5s infinite linear
