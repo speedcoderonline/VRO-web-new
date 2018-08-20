@@ -53,6 +53,7 @@
 				left 50%
 				text-align center
 				box-shadow 0 3px 20px rgba(black, .2)
+				box-sizing border-box
 				h3
 					color black
 					text-shadow none
@@ -71,9 +72,10 @@
 			.video-wrapper
 				h2
 					margin-bottom 20px
-				video.section-video
-					width 700px
-					height auto
+				.section-video
+					width 500px
+					height 300px
+					border none
 			.text-wrapper
 				margin-left 80px
 				p
@@ -91,9 +93,10 @@
 				width 90%
 				max-width 1200px
 				margin auto
-				div
+				a
 					flex 1
 					cursor pointer
+					display block
 					&:hover
 						opacity .9
 					img
@@ -101,5 +104,29 @@
 						margin-bottom 5px
 					p
 						color $green
-		.section-2
-			height 400px
+		// .section-2
+		// 	height 400px
+			
+		@media(max-width 768px)
+			.section-1
+				display block
+				.video-wrapper
+					text-align center
+					margin-bottom 60px
+				.text-wrapper
+					margin auto
+					width 85%
+					
+		@media(max-width 768px)
+			h1
+				font-size 12vw
+			.banner
+				width 90%
+			.section-1 .video-wrapper .section-video
+				width 80%
+				height 200px
+			section.sm-banner .sm-wrapper
+				display block
+				
+				a
+					margin-bottom 30px

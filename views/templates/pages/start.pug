@@ -12,9 +12,9 @@ block mainContent
 			source(src='#')
 
 		.header-content
-			h1 Vår vision är att göra din skoltid bättre!
+			h1 Vår vision är att göra din skoltid bättre
 			.btn-wrapper
-				a Om kåren
+				//- a Om kåren
 				#sign-in(onclick='loginMember()') Logga in
 
 		.banner
@@ -24,8 +24,7 @@ block mainContent
 	section.section-1
 		.video-wrapper
 			h2 Se filmen för att få en känsla av kårandan!
-			video.section-video(controls)
-				source(src='videos/annual-2018.mp4')
+			iframe.section-video(src='https://www.youtube.com/watch?v=gR_5tKJQSBE')
 		.text-wrapper
 			p Viktor Rydberg Odenplans Elevkår är Viktor Rydberg Gymnasium Odenplans största förening, till vilken nästan 100 % av skolans elever aktivt valt att ansluta sig. Elevkåren samlar och engagerar elever från alla årskurser, program och klasser för att tillsammans förgylla skoltiden för kårens medlemmar. För oss i kåren är målet enkelt: medlemmarna ska leva sin gymnasietid, inte bara överleva den.
 
@@ -36,26 +35,27 @@ block mainContent
 	section.sm-banner
 		h2 Besök våra sociala kanaler!
 		.sm-wrapper
-			#instagram
+			a#instagram(href='https://www.instagram.com/vroelevkar/')
 				img(src='icons/instagram-icon-green.png')
 				p vroelevkar
-			#snapchat
+			a#snapchat(href='https://www.snapchat.com/add/vroelevkar/')
 				img(src='icons/snapchat-icon-green.png')
 				p vroelevkar
-			#twitter
+			a#twitter(href='https://twitter.com/vroelevkar')
 				img(src='icons/twitter-icon-green.png')
 				p vroelevkar
-			#facebook
+			a#facebook(href='https://www.facebook.com/vroelevkar/')
 				img(src='icons/facebook-icon-green.png')
 				p Viktor Rydberg<br>Odenplans Elevkår
-			#youtube
+			a#youtube(href='https://www.youtube.com/user/OdenplansElevkar/featured')
 				img(src='icons/youtube-icon-green.png')
 				p Viktor Rydberg<br>Odenplans Elevkår
 	section.section-2
 	script.
 		function loginMember(){
-			var provider = new firebase.auth.GoogleAuthProvider();
-			firebase.auth().signInWithRedirect(provider);
+			alert('Den här funktionen än nere för underhåll')
+			//- var provider = new firebase.auth.GoogleAuthProvider();
+			//- firebase.auth().signInWithRedirect(provider);
 		}
 		firebase.auth().onAuthStateChanged(user => {
 			if(user){
