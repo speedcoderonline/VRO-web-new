@@ -8,9 +8,7 @@ block mainContent
 	//- button(onclick='logoutMemmber()') Logga ut
 
 	header
-		video.background-video(poster='images/thumbnail.jpg' playbackRate='3.0' autoplay loop muted)
-			source(src='#')
-
+		.background-img
 		.header-content
 			h1 Vår vision är att göra din skoltid bättre
 			.btn-wrapper
@@ -24,7 +22,7 @@ block mainContent
 	section.section-1
 		.video-wrapper
 			h2 Se filmen för att få en känsla av kårandan!
-			iframe.section-video(src='https://www.youtube.com/watch?v=gR_5tKJQSBE')
+			iframe.section-video(width="500" height="300" src="https://www.youtube.com/embed/gR_5tKJQSBE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen)
 		.text-wrapper
 			p Viktor Rydberg Odenplans Elevkår är Viktor Rydberg Gymnasium Odenplans största förening, till vilken nästan 100 % av skolans elever aktivt valt att ansluta sig. Elevkåren samlar och engagerar elever från alla årskurser, program och klasser för att tillsammans förgylla skoltiden för kårens medlemmar. För oss i kåren är målet enkelt: medlemmarna ska leva sin gymnasietid, inte bara överleva den.
 
@@ -53,7 +51,7 @@ block mainContent
 	section.section-2
 	script.
 		function loginMember(){
-			alert('Den här funktionen än nere för underhåll')
+			alert('Den här funktionen är tillfälligt nere för underhåll. Inloggning komemr vara tillgängligt inom kort!')
 			//- var provider = new firebase.auth.GoogleAuthProvider();
 			//- firebase.auth().signInWithRedirect(provider);
 		}
