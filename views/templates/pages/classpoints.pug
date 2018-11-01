@@ -10,6 +10,7 @@ block mainContent
 	.main-wrapper
 
 		h1 Klasspokalen
+		p Senast uppdaterat 2018-10-31
 
 		.scoreboard#scoreboard
 			//- .participant
@@ -125,7 +126,7 @@ block mainContent
 				var line = document.createElement('div')
 				line.classList.add('line')
 				var lineWidth = schoolClass.points / highScore * 100
-				line.style.width = 'calc(' + lineWidth + '% - 170px)'
+				line.style.width = 'calc(' + lineWidth + '% - 140px)'
 				var points = document.createElement('div')
 				points.classList.add('points')
 				points.innerHTML = schoolClass.points
