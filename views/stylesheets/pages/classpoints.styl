@@ -1,0 +1,63 @@
+[data-page="classpoints"]
+	
+	.main-content
+		background $lightgrey
+		*
+			color black
+		.main-wrapper
+			padding 60px 0
+			h1
+				text-align center
+				margin-bottom 40px
+				
+			.scoreboard
+				max-width 1200px
+				width 90%
+				margin auto
+				.participant
+					display flex
+					align-items center
+					margin 20px 0
+					justify-content flex-start
+					*
+						color $green
+						font-size 120%
+						font-weight bold
+						text-transform uppercase
+					.name
+						width 120px
+					.line
+						height 4px
+						background $green
+						position relative
+						&::after
+							content ''
+							width 10px
+							height 10px
+							border-radius 100%
+							background $green
+							position absolute
+							right 0
+							top 50%
+							transform translate(50%, -50%)
+					&:nth-child(1)
+						.line
+							width calc(100% - 250px)
+					&:nth-child(2)
+						.line
+							width calc(89% - 250px)
+					&:nth-child(3)
+						.line
+							width calc(82% - 250px)
+					.points
+						margin-left 20px
+						min-width 50px
+			.under-text-wrapper
+				text-align center
+				.under-text
+					font-size 120%
+					margin-top 40px
+					margin-bottom 10px
+				.rules-link
+					font-size 140%
+					font-weight bold

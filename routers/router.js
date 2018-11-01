@@ -14,9 +14,10 @@ module.exports = (function() {
   var routes = [
     {page:'start', path:'/'},
     {page:'contact'},
-    {page:'signed-in-home', path:'user'},
+    {page:'signed-in-home', path:'user', robots:'noindex'},
     {page:'new-user'},
     {page:'matsedel'},
+    {page:'classpoints'},
     {page:'styrelsen'},
     {page:'styrelsen-roll',path:'styrelsen/:name', dataGen: req=>{
       return {styrelsen:req.params.name}

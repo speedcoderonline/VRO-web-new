@@ -50,16 +50,37 @@ html
 		else
 			.nav-header
 				a(href='/').link-logo
-				nav
+				#menu-icon(onclick='toggleMenu()')
+					.menu-row
+					.menu-row
+					.menu-row
+				nav#navigation
 					a(href='/contact') Kontakt
-				#header-sign-in(onclick='loginMember()') Logga in
+					a(href='/classpoints') Klasspokalen
+					a(href='https://drive.google.com/drive/folders/0B-UL6CSzT9I0bXUzUXVCRFNVZVk?usp=sharing') Styrelseprotokoll
+					#header-sign-in(onclick='loginMember()') Logga in
 			.main-content
 				block mainContent
 			footer
 				include elements/footer-content
 		script.
+			var menuShown = false
 			firebase.auth().onAuthStateChanged(function(user){
 				if(user){
 					_('spinner').classList.add('hidden')
 				}
 			})
+			function toggleMenu(){
+				var menu = _('menu-icon')
+				var nav = _('navigation')
+
+				if(!menuShown){
+					menu.classList.add('openNav')
+					nav.classList.add('open')
+					menuShown = true
+				} else if (menuShown){
+					menu.classList.remove('openNav')
+					nav.classList.remove('open')
+					menuShown = false
+				}
+			}

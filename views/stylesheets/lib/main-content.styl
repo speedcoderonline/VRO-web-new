@@ -49,6 +49,10 @@ body
 
 // Signed out header and nav
 
+	.signed-out-header-background
+		height 87px
+		background $green
+
 	.nav-header
 		position absolute
 		top 0
@@ -64,22 +68,64 @@ body
 		.link-logo
 			box-shadow 0 3px 20px rgba(black, .2)
 			border-radius 100%
+			position absolute
 		
+		#menu-icon
+			position absolute
+			top 30px
+			right 40px
+			display none
+			.menu-row
+				height 2px
+				width 30px
+				margin 5px 0
+				background white
+				transform-origin center left
+				transition .3s ease-in-out
+
 		nav
 			display flex
 			align-items center
 			justify-content center
 			flex 1
-			a
+				
+			a, #header-sign-in
 				padding 20px 40px
+				font-weight bold
+				font-size 170%
+				font-family 'BebasNeue'
+				cursor pointer
+				&:hover
+					opacity .8
 				
-		nav a, #header-sign-in
-			font-weight bold
-			font-size 170%
-			font-family 'BebasNeue'
-			cursor pointer
-			&:hover
-				opacity .8
-				
-		@media(max-width 414px)
-			padding 10px 20px
+		@media(max-width 1200px)
+			padding 0
+			.link-logo
+				top 20px
+				left 40px
+			#menu-icon
+				display block
+				cursor pointer
+			#menu-icon.openNav
+				.menu-row:nth-child(1)
+					transform rotate(45deg) translateY(-5.5px)
+				.menu-row:nth-child(2)
+					// transform translate(-50px)
+					opacity 0
+				.menu-row:nth-child(3)
+					transform rotate(-45deg) translateY(5.5px)
+			#navigation
+				flex-direction column
+				background $green
+				padding 0
+				height 0
+				overflow hidden
+				transition .3s ease-in-out
+				a, #header-sign-in
+					padding 10px 0
+					font-size 160%
+					
+			#navigation.open
+				padding 40px 0
+				height 200px
+				box-shadow 0 10px 10px rgba(black, .3)

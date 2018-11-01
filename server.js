@@ -6,16 +6,32 @@ const nib = require('nib')
 const bodyParser = require('body-parser')
 const firebase = require('firebase')
 const admin = require('firebase-admin')
+const bb = require('express-busboy');
+const fileUpload = require('express-fileupload');
 
 // Initiate App
 const app = express()
+
+// Parse requests
+
+app.use(bodyParser.urlencoded({ extended:true }));
+
+app.use(bodyParser.json());
+
+app.use(fileUpload());
+
+// bb.extend(app, {
+// 	upload: true,
+// 	path: 'uploads',
+// 	allowedPath: /^\/uploads$/
+// });
 
 //Initialize firebase
 var serviceAccount = require("./server-functions/serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://vro-web.firebaseio.com"
+	credential: admin.credential.cert(serviceAccount),
+	databaseURL: "https://vro-web.firebaseio.com"
 });
 
 //Compile Stylus
@@ -25,8 +41,6 @@ function compile(str, path){
 	.set('filename', path)
 	.use(nib())
 }
-
-app.use(bodyParser())
 
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'))
@@ -75,4 +89,4 @@ const port = process.env.PORT || 8000
 // Start Server
 app.listen(port, function(){
 	console.log('Listening on port ' + port)
-}) 
+})

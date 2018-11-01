@@ -1,0 +1,141 @@
+extends ../index
+
+block pageStatus
+	- var signedOutPage = true;
+
+block mainContent
+
+	.signed-out-header-background
+
+	.main-wrapper
+
+		h1 Klasspokalen
+
+		.scoreboard#scoreboard
+			//- .participant
+			//- 	.name 1 na18d
+			//- 	.line
+			//- 	.points 1095
+			//- .participant
+			//- 	.name 2 na18c
+			//- 	.line
+			//- 	.points 964
+			//- .participant
+			//- 	.name 3 na18b
+			//- 	.line
+			//- 	.points 888
+
+		.under-text-wrapper
+			.under-text Vill du läsa det officiella reglementet för klasspokalen?
+			a.rules-link(href="https://drive.google.com/file/d/1ZvWRXNA1l_JpIaTQOzHImzrsq3vLeGq5/view") Tryck här!
+
+
+	script.
+		var participants = [
+			{
+				name:"na21b",
+				points:"397"
+			},
+			{
+				name:"na19a",
+				points:"385"
+			},
+			{
+				name:"na21c",
+				points:"370"
+			},
+			{
+				name:"na19b",
+				points:"341"
+			},
+			{
+				name:"na19c",
+				points:"340"
+			},
+			{
+				name:"na21d",
+				points:"320"
+			},
+			{
+				name:"ek21b",
+				points:"305"
+			},
+			{
+				name:"ek21a",
+				points:"304"
+			},
+			{
+				name:"na19d",
+				points:"278"
+			},
+			{
+				name:"sb21",
+				points:"258"
+			},
+			{
+				name:"na21a",
+				points:"230"
+			},
+			{
+				name:"ek19a",
+				points:"78"
+			},
+			{
+				name:"na20d",
+				points:"58"
+			},
+			{
+				name:"na20a",
+				points:"57"
+			},
+			{
+				name:"na20b",
+				points:"52"
+			},
+			{
+				name:"sb19",
+				points:"45"
+			},
+			{
+				name:"sb20",
+				points:"38"
+			},
+			{
+				name:"na20c",
+				points:"31"
+			},
+			{
+				name:"ek20",
+				points:"23"
+			},
+			{
+				name:"ek19b",
+				points:"16"
+			},
+		]
+
+		function generateScoreBoard(){
+			var highScore = participants[0].points
+			participants.forEach(function(schoolClass){
+				var participant = document.createElement('div')
+				participant.classList.add('participant')
+				var name = document.createElement('div')
+				name.classList.add('name')
+				name.innerHTML = schoolClass.name
+				var line = document.createElement('div')
+				line.classList.add('line')
+				var lineWidth = schoolClass.points / highScore * 100
+				line.style.width = 'calc(' + lineWidth + '% - 170px)'
+				var points = document.createElement('div')
+				points.classList.add('points')
+				points.innerHTML = schoolClass.points
+
+				participant.appendChild(name)
+				participant.appendChild(line)
+				participant.appendChild(points)
+
+				_('scoreboard').appendChild(participant)
+			})
+		}
+
+		generateScoreBoard()

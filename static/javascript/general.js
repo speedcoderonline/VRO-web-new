@@ -12,6 +12,12 @@ function _(eId){
 	return document.getElementById(eId)
 }
 
+//Get class
+
+function __(eClass){
+	return document.querySelector('.' + eClass)
+}
+
 //Current Firebase user
 function currentUser(){
 	var user = firebase.auth().currentUser

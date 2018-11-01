@@ -1,3 +1,44 @@
-form(action='/admin/add-student' method='post')
-	input(id='first_name' placeholder='namn')
-	button(type='submit') skicka
+form(id='studentform')
+
+	input(type='checkbox' id='member')
+	label(for='member') Medlem
+	br
+	input(id='firstname' placeholder='Förnamn')
+	br
+	input(id='lastname' placeholder='Efternamn')
+	br
+	input(id='mail' placeholder='E-post')
+	br
+	select(id='gender')
+		option(id='1') Tjej
+		option(id='2') Kille
+		option(id='3') Övrigt / vill ej ange
+	br
+	input(id='city' placeholder='Folkbokförd stad')
+	br
+	input(id='phone' placeholder='Telefonnummer')
+	br
+	input(id='group' placeholder='Klass')
+	br
+	input(id='program' placeholder='Program')
+	br
+
+	button(type='submit') Skicka
+
+
+form(id="fileupload" action="/admin/add/studentlist" enctype="multipart/form-data" method="POST")
+	input(name="studentfile" type="file")
+	button(type="submit") Skicka
+
+	script.
+		studentform.onsubmit = function(e){
+			e.preventDefault()
+			var firstname = studentform.firstname.value
+			var lastname = studentform.lastname.value
+			var mail = studentform.mail.value
+			var gender = studentform.gender.value
+			var city = studentform.city.value
+			var phone = studentform.phone.value
+			var group = studentform.group.value
+			var program = studentform.program.value
+		}
