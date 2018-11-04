@@ -34,35 +34,4 @@ block mainContent
 			a#message Skicka ett förslag
 
 	script.
-		function authenticateMember(){
-			var authenticatedMember = undefined
-			var userEmail;
-			firebase.auth().onAuthStateChanged(user => {
-				if(user){
-					user.providerData.forEach(profile =>{
-						userEmail = profile.email.replace(/\./g,'%2E')
-						dbPull('students/' + userEmail, student => {
-							if(student.val().member){
-								authenticatedMember = true
-							}else{
-								authenticatedMember = false
-							}
-							console.log(authenticatedMember)
-						})
-					})
-				}else{
-					authenticatedMember = false
-				}
-			})
-			if(authenticatedMember != undefined){
-				console.log(authenticatedMember)
-				return authenticatedMember
-			}
-		}
-
-		if(authenticateMember()){
-			console.log('hurray')
-		}else{
-			console.log('uuuuuuuuh')
-			window.location.replace('/')
-		}
+		authenticateMember()

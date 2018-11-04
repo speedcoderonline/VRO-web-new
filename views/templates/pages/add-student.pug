@@ -1,34 +1,32 @@
-form(id='studentform')
+extends ../index
 
-	input(type='checkbox' id='member')
-	label(for='member') Medlem
-	br
-	input(id='firstname' placeholder='Förnamn')
-	br
-	input(id='lastname' placeholder='Efternamn')
-	br
-	input(id='mail' placeholder='E-post')
-	br
-	select(id='gender')
-		option(id='1') Tjej
-		option(id='2') Kille
-		option(id='3') Övrigt / vill ej ange
-	br
-	input(id='city' placeholder='Folkbokförd stad')
-	br
-	input(id='phone' placeholder='Telefonnummer')
-	br
-	input(id='group' placeholder='Klass')
-	br
-	input(id='program' placeholder='Program')
-	br
+block mainContent
 
-	button(type='submit') Skicka
+	h2 Lägg till användare
+
+	form(id='studentform')
+		.input-wrapper
+			input(id='firstname' placeholder='Förnamn')
+			input(id='lastname' placeholder='Efternamn')
+			input(id='mail' placeholder='E-post')
+			select(id='gender')
+				option(id='1') Tjej
+				option(id='2') Kille
+				option(id='3') Övrigt / vill ej ange
+			input(id='city' placeholder='Folkbokförd stad')
+			input(id='phone' placeholder='Telefonnummer')
+			input(id='group' placeholder='Klass')
+			input(id='program' placeholder='Program')
+		input(type='checkbox' id='member')
+		label(for='member') Medlem
+		br
+
+		button(type='submit') Skicka
 
 
-form(id="fileupload" action="/admin/add/studentlist" enctype="multipart/form-data" method="POST")
-	input(name="studentfile" type="file")
-	button(type="submit") Skicka
+	//- form(id="fileupload" action="/admin/add/studentlist" enctype="multipart/form-data" method="POST")
+	//- 	input(name="studentfile" type="file")
+	//- 	button(type="submit") Skicka
 
 	script.
 		studentform.onsubmit = function(e){
@@ -39,6 +37,37 @@ form(id="fileupload" action="/admin/add/studentlist" enctype="multipart/form-dat
 			var gender = studentform.gender.value
 			var city = studentform.city.value
 			var phone = studentform.phone.value
-			var group = studentform.group.value
+			var group = studentform.group.value.toLowerCase()
 			var program = studentform.program.value
+			var member = studentform.member.checked
+
+			var currentYear = (new Date()).getFullYear()
+			currentYear = currentYear % 100
+			var currentMonth = (new Date()).getMonth()
+			if(currentMonth >= 6){
+				currentYear++
+			}
+			var gradYear = group.replace(/[^0-9]/g,'')
+
+			var year = currentYear - gradYear + 3
+			console.log(member)
+			if(firstname != '' || firstname != '' || lastname != '' || mail != '' || city != '' || phone != '' || group != '' || program != ''){
+				db('students/' + mail.replace(/\./g,'%2E')).set({
+					firstName: firstname,
+					lastName: lastname,
+					email: mail,
+					gender: gender,
+					city: city,
+					phone: phone,
+					group: group,
+					program: program,
+					year: year,
+					member: member
+				}).then(function(){
+					alert('Användare registrerad')
+					studentform.reset()
+				})
+			}else{
+				alert('Fyll i alla fält!')
+			}
 		}

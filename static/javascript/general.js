@@ -34,6 +34,85 @@ function logoutMember(){
 	window.location.href = '/'
 }
 
+// Firebase onAuthStateChanged
+function auth(func){
+	return firebase.auth().onAuthStateChanged(func)
+}
+
+// Authenticate if user is member
+
+function authenticateMember(){
+	var authenticatedMember = undefined
+	var userEmail
+	auth(function(user){
+		if(user){
+			user.providerData.forEach(profile =>{
+				userEmail = profile.email.replace(/\./g,'%2E')
+				dbPull('students/' + userEmail, student => {
+					if(student.val().member){
+						authenticatedMember = true
+					}else{
+						authenticatedMember = false
+					}
+					checkMemberAuth(authenticatedMember)
+				})
+			})
+		}else{
+			authenticatedMember = false
+			checkMemberAuth(authenticatedMember)
+		}
+	})
+
+	function checkMemberAuth(status){
+		if(status != undefined){
+			console.log(status)
+			if(status){
+				console.log('hurray')
+			}else{
+				console.log('uuuuuuuuh')
+				window.location.replace('/')
+			}
+		}
+	}
+}
+
+// Authenticate Admin
+
+function authenticateAdmin(){
+	var authenticatedAdmin = undefined
+	var userEmail
+	auth(function(user){
+		if(user){
+			user.providerData.forEach(profile =>{
+				userEmail = profile.email.replace(/\./g,'%2E')
+				dbPull('admins/' + userEmail, admin => {
+					if(admin.key === userEmail){
+						authenticatedAdmin = true
+					}else{
+						authenticatedAdmin = false
+					}
+					checkAdminAuth(authenticatedAdmin)
+				})
+			})
+		}else{
+			authenticatedAdmin = false
+			checkAdminAuth(authenticatedAdmin)
+		}
+	})
+
+	function checkAdminAuth(status){
+		if(status != undefined){
+			console.log(status)
+			if(status){
+				console.log('hurray')
+			}else{
+				console.log('uuuuuuuuh')
+				window.location.replace('/user')
+			}
+		}
+	}
+}
+
 //Firebase database access 
 function db(path){
 	return firebase.database().ref(path)

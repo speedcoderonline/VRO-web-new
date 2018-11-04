@@ -51,23 +51,21 @@ block mainContent
 	section.section-2
 	script.
 		function loginMember(){
-			alert('Den här funktionen är tillfälligt nere för underhåll. Inloggning kommer vara tillgängligt inom kort!')
-			//- var provider = new firebase.auth.GoogleAuthProvider();
-			//- firebase.auth().signInWithRedirect(provider);
+			//- alert('Den här funktionen är tillfälligt nere för underhåll. Inloggning kommer vara tillgängligt inom kort!')
+			var provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithRedirect(provider);
 		}
 		firebase.auth().onAuthStateChanged(user => {
 			if(user){
+				var emailApproved = false
 				user.providerData.forEach(function(profile){
 					dbPull('students', function(snapshot){
-						var emailApproved = false
 						var member = false
 						snapshot.forEach(function(student){
 							profileEmail = profile.email.replace(/\./g,'%2E')
 							if(student.key === profileEmail){
 								console.log('Success')
 								emailApproved = true
-							}else{
-								alert('Din mailadress är inte registrerad hos oss. Om det är ett misstag, kontakta oss på odenplanselevkar@vrg.se')
 							}
 							if(student.val().member){
 								member = true
@@ -87,6 +85,10 @@ block mainContent
 								console.log('User deleted')
 							})
 
+						}
+					}).then(function(){
+						if(!emailApproved){
+							alert('Din mailadress är inte registrerad hos oss. Om det är ett misstag, kontakta oss på odenplanselevkar@vrg.se')
 						}
 					})
 				})
