@@ -12,8 +12,6 @@
 
 		.input-wrapper
 			display grid
-			grid-column-start 1
-			grid-column-end 3
 			grid-template-columns 1fr 1fr
 			grid-gap 10px
 		
@@ -48,11 +46,17 @@
 			background $darkgreen
 			border none
 			padding 15px 30px
-			width 400px
+			width 90%
+			max-width 400px
 			box-sizing border-box
 			font-weight bold
 			font-size 120%
 			cursor pointer
 			margin-top 15px
 			margin-bottom 50px
-			grid-columd 1
+			grid-column 1
+			
+	@media(max-width 1023px)
+		form
+			.input-wrapper
+				grid-template-columns 1fr
