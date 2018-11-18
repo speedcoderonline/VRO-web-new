@@ -1,0 +1,32 @@
+extends ../index
+
+block mainContent
+
+	.card-wrapper
+		#card
+			img#card-front(src='/images/karkort.png')
+			#card-back
+				#name.name
+				.card-text Innehavaren av detta kort är medlem i Viktor Rydberg Odenplans Elevkår och berättigad till rabatter hos kårens samarbetspartners.
+		#card-btn.authed-btn(onclick='turnCard()') Vänd kort
+
+
+	script.
+		cardFlipped = false
+		function turnCard(){
+			var card = _('card')
+
+			if(!cardFlipped){
+				card.classList.add('flipped')
+				cardFlipped = true
+			} else if (cardFlipped){
+				card.classList.remove('flipped')
+				cardFlipped = false
+			}
+		}
+
+		auth(function(user){
+			user.providerData.forEach(function(snapshot){
+				_('name').innerHTML = snapshot.displayName
+			})
+		})

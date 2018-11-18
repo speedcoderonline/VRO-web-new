@@ -29,15 +29,23 @@ html
 		block pageStatus
 		if !signedOutPage
 			header.topbar
-				a(href='/').link-logo
+				#menu-icon(onclick='toggleMenu("menu-icon", "sidebar")')
+					.menu-row
+					.menu-row
+					.menu-row
+				a(href='/user').link-logo
 				h2.signed-in-heading VRO Elevkår Web-app
 				.settings(onclick='logoutMember()') Logga ut
 
-			aside.sidebar
+			aside.sidebar#sidebar
 				nav.signed-in-nav
-					a Matsedeln
-					a Klasspokalen
-					a Kommittéer
+					//- a Matsedeln
+					a(href='/user/classpoints') Klasspokalen
+					a(href='/user/discount-card') Kårkortet
+					a#log-out(onclick='logoutMember()') Logga ut
+					//- a(href='/user/interest-groups') Kommittéer
+
+					//- a.admin-btn Admin
 
 			.main-content.signed-in
 				block mainContent
@@ -48,13 +56,13 @@ html
 		else
 			.nav-header
 				a(href='/').link-logo
-				#menu-icon(onclick='toggleMenu()')
+				#menu-icon2(onclick='toggleMenu("menu-icon2", "navigation")')
 					.menu-row
 					.menu-row
 					.menu-row
 				nav#navigation
 					a(href='/contact') Kontakt
-					a(href='/classpoints') Klasspokalen
+					a Klasspokalen
 					a(href='https://drive.google.com/drive/folders/0B-UL6CSzT9I0bXUzUXVCRFNVZVk?usp=sharing') Styrelseprotokoll
 					#header-sign-in(onclick='loginMember()') Logga in
 			.main-content
@@ -64,13 +72,33 @@ html
 		script.
 			var firstSubPage = window.location.pathname.replace(/\/$/,'').split('/')
 			firstSubPage = firstSubPage[1]
-			
+
+			//- If User Page
+
 			if(firstSubPage === 'user'){
 				authenticateMember()
+				authenticateAdmin(function(){
+					var adminBtn = document.createElement('a')
+					adminBtn.classList.add('admin-btn')
+					adminBtn.href = '/admin'
+					adminBtn.innerHTML = 'Admin'
+					__('signed-in-nav').appendChild(adminBtn)
+				}, undefined)
 			}
 
+			//- If Admin Page
+
 			if(firstSubPage === 'admin'){
-				authenticateAdmin()
+				authenticateAdmin(function(){
+					var adminBtn = document.createElement('a')
+					adminBtn.classList.add('admin-btn')
+					adminBtn.href = '/admin'
+					adminBtn.innerHTML = 'Admin'
+					__('signed-in-nav').appendChild(adminBtn)
+					console.log(adminBtn)
+				}, function(){
+					window.location.replace('/user')
+				})
 			}
 
 			var menuShown = false
@@ -79,9 +107,9 @@ html
 					_('spinner').classList.add('hidden')
 				}
 			})
-			function toggleMenu(){
-				var menu = _('menu-icon')
-				var nav = _('navigation')
+			function toggleMenu(menu, nav){
+				var menu = _(menu)
+				var nav = _(nav)
 
 				if(!menuShown){
 					menu.classList.add('openNav')

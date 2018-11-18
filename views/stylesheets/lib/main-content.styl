@@ -11,7 +11,18 @@ body
 		box-sizing border-box
 		display flex
 		align-items center
-		
+		*
+			color white
+		#menu-icon
+			cursor pointer
+			display none
+			.menu-row
+				height 2px
+				width 30px
+				margin 5px 0
+				background white
+				transform-origin center left
+				transition .3s ease-in-out
 		h2.signed-in-heading
 			flex 1
 			text-align center
@@ -19,6 +30,25 @@ body
 		.settings
 			font-size 120%
 			cursor pointer
+			
+		@media(max-width 1023px)
+			.link-logo
+				margin-left auto
+			#menu-icon
+				display block
+			#menu-icon.openNav
+				.menu-row:nth-child(1)
+					transform rotate(45deg) translateY(-5.5px)
+				.menu-row:nth-child(2)
+					// transform translate(-50px)
+					opacity 0
+				.menu-row:nth-child(3)
+					transform rotate(-45deg) translateY(5.5px)
+			h2.signed-in-heading
+				display none
+				
+			.settings
+				display none
 		
 	aside.sidebar
 		z-index 10
@@ -28,9 +58,14 @@ body
 		padding-top 90px
 		box-sizing border-box
 		background $middlegreen
+		transition ease-in-out .3s
+		*
+			color white
 		
 		nav
 			padding 15px 0
+			position relative
+			height inherit
 			a 
 				display block
 				padding 15px 30px
@@ -38,6 +73,32 @@ body
 				
 				&:hover
 					background rgba(white, .1)
+			a.admin-btn
+				border 1px solid white
+				border-radius 10px
+				position absolute
+				bottom 50px
+				left 50%
+				transform translateX(-50%)
+				padding 10px 70px
+				font-weight bold
+				font-size 140%
+				
+				&:hover
+					background none
+					opacity .8
+					
+			a#log-out
+				display none
+					
+		@media(max-width 1023px)
+			left -250px
+			&.open
+				left 0
+			nav
+				a#log-out
+					display block
+				
 	.main-content
 		width 100%
 		box-sizing border-box
@@ -48,7 +109,10 @@ body
 		padding-left 250px
 		padding-top 90px
 		min-height 100vh
-		background $green
+		background $lightgrey
+		
+		@media(max-width 1023px)
+			padding-left 0
 		
 
 // Signed out header and nav
@@ -68,13 +132,15 @@ body
 		justify-content stretch
 		align-items center
 		padding 10px 60px
+		*
+			color white
 		
 		.link-logo
 			box-shadow 0 3px 20px rgba(black, .2)
 			border-radius 100%
 			position absolute
 		
-		#menu-icon
+		#menu-icon2
 			position absolute
 			top 30px
 			right 40px
@@ -107,10 +173,10 @@ body
 			.link-logo
 				top 20px
 				left 40px
-			#menu-icon
+			#menu-icon2
 				display block
 				cursor pointer
-			#menu-icon.openNav
+			#menu-icon2.openNav
 				.menu-row:nth-child(1)
 					transform rotate(45deg) translateY(-5.5px)
 				.menu-row:nth-child(2)

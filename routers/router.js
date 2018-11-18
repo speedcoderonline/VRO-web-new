@@ -16,22 +16,24 @@ module.exports = (function() {
     {page:'contact'},
     {page:'signed-in-home', path:'user', robots:'noindex'},
     {page:'new-user'},
-    {page:'matsedel'},
-    {page:'classpoints'},
-    {page:'styrelsen'},
-    {page:'styrelsen-roll',path:'styrelsen/:name', dataGen: req=>{
+    {page:'matsedel', path:'user/food'},
+    {page:'classpoints', path:'user/classpoints'},
+    {page:'discount-card', path:'user/discount-card'},
+    {page:'styrelsen', path:'user/board'},
+    {page:'styrelsen-roll',path:'user/board/:name', dataGen: req=>{
       return {styrelsen:req.params.name}
     }},
-    {page:'utskott'},
-    {page:'utskott-sida',path:'utskott/:name', dataGen: req=>{
+    {page:'utskott', path:'user/committees'},
+    {page:'utskott-sida',path:'user/committees/:name', dataGen: req=>{
       return {utskott:req.params.name}
     }},
-    {page:'interest-groups'},
-    {page:'interest-group',path:'interest-groups/:name', dataGen: req=>{
+    {page:'interest-groups', path:'user/interest-groups'},
+    {page:'interest-group',path:'user/interest-groups/:name', dataGen: req=>{
       return {interestGroups:req.params.name}
     }},
     {page:'create-group'},
     {page:'group-success', path:'success'},
+    {page:'admin'},
     {page:'add-student', path:'admin/add-student'}
   ]
   

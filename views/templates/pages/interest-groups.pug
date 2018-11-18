@@ -8,6 +8,6 @@ block mainContent
 			snapshot.forEach(function(group){
 				console.log(group.val())
 				console.log(group.key)
-				document.querySelector('.links').innerHTML += '<a href="/interest-groups/' + group.key + '">' + group.val().name + '</a><br>'
+				document.querySelector('.links').innerHTML += '<a href="/user/interest-groups/' + group.key + '">' + group.val().name + '</a><br>'
 			})
 		})

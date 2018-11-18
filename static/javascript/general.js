@@ -51,6 +51,16 @@ function authenticateMember(){
 				dbPull('students/' + userEmail, student => {
 					if(student.val().member){
 						authenticatedMember = true
+						dbPull('admins/' + userEmail, admin => {
+							if(admin.val()){
+								var sideBar = __('signed-in-nav')
+								var adminBtn = document.createElement('a')
+								adminBtn.classList.add('admin-btn')
+								adminBtn.setAttribute('href', '/admin')
+								adminBtn.innerHTML = 'Admin'
+								sideBar.appendChild(adminBtn)
+							}
+						})
 					}else{
 						authenticatedMember = false
 					}
@@ -78,7 +88,7 @@ function authenticateMember(){
 
 // Authenticate Admin
 
-function authenticateAdmin(){
+function authenticateAdmin(cbSuccess, cbFailure){
 	var authenticatedAdmin = undefined
 	var userEmail
 	auth(function(user){
@@ -105,13 +115,20 @@ function authenticateAdmin(){
 			console.log(status)
 			if(status){
 				console.log('hurray')
+				if(cbSuccess != undefined){
+					cbSuccess()
+				}
 			}else{
 				console.log('uuuuuuuuh')
-				window.location.replace('/user')
+				if(cbFailure != undefined){
+					cbFailure()
+				}
 			}
 		}
 	}
 }
+
+// User Authentication Admin
 
 //Firebase database access 
 function db(path){

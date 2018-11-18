@@ -1,0 +1,45 @@
+[data-page='discount-page']
+	
+.main-content
+	.card-wrapper
+		text-align center
+		padding-top 100px
+		position relative
+		#card
+			transform-style preserve-3d
+			transition ease-in-out .5s
+			position absolute
+			width 400px
+			height 250px
+			display inline-block
+			transform translate(-50%, 0) rotate(90deg)
+			left 50%
+			&.flipped
+				transform translate(-50%, 0) rotate(90deg) rotateX(180deg)
+			img#card-front
+				width 400px
+				border-radius 10px
+				position absolute
+				top 0
+				left 0
+				backface-visibility hidden
+			#card-back
+				width 400px
+				height 250px
+				border-radius 10px
+				background #000
+				position absolute
+				top 0
+				left 0
+				backface-visibility hidden
+				transform rotateX(180deg)
+				*
+					color white
+				.name
+					font-weight bold
+					font-size 140%
+					margin 50px
+
+		#card-btn
+			margin auto
+			margin-top 360px
