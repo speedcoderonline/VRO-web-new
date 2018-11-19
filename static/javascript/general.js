@@ -96,7 +96,7 @@ function authenticateAdmin(cbSuccess, cbFailure){
 			user.providerData.forEach(profile =>{
 				userEmail = profile.email.replace(/\./g,'%2E')
 				dbPull('admins/' + userEmail, admin => {
-					if(admin.key === userEmail){
+					if(admin.val()){
 						authenticatedAdmin = true
 					}else{
 						authenticatedAdmin = false
