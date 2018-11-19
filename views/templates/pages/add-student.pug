@@ -51,7 +51,9 @@ block mainContent
 
 			var year = currentYear - gradYear + 3
 			console.log(member)
-			if(firstname != '' || firstname != '' || lastname != '' || mail != '' || city != '' || phone != '' || group != '' || program != ''){
+			if(firstname === '' || lastname === '' || mail === ''){
+				alert('Fyll i alla fält!')
+			}else{
 				db('students/' + mail.replace(/\./g,'%2E')).set({
 					firstName: firstname,
 					lastName: lastname,
@@ -62,12 +64,10 @@ block mainContent
 					group: group,
 					program: program,
 					year: year,
-					member: member
+					member: true
 				}).then(function(){
 					alert('Användare registrerad')
 					studentform.reset()
 				})
-			}else{
-				alert('Fyll i alla fält!')
 			}
 		}
