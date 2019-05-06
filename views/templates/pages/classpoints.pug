@@ -10,7 +10,7 @@ block mainContent
 	.main-wrapper
 
 		h1 Klasspokalen
-		p Senast uppdaterat 2019-03-05
+		p Senast uppdaterat 2019-05-06
 
 		.scoreboard#scoreboard
 			//- .participant
@@ -35,46 +35,45 @@ block mainContent
 		var participants = [
 			{
 				name:"na21c",
-				points:"883"
+				points:"983"
 			},
 			{
 				name:"na19b",
-				points:"817"
+				points:"917"
 			},
 			{
 				name:"na21b",
-				points:"789"
+				points:"894"
 			},
 			{
 				name:"na19a",
-				points:"762"
-			},
-			
-			{
-				name:"na19c",
-				points:"692"
+				points:"874"
 			},
 			{
 				name:"ek21b",
-				points:"691"
+				points:"731"
+			},
+			{
+				name:"na19c",
+				points:"714"
 			},
 			{
 				name:"na19d",
-				points:"577"
+				points:"599"
+			},
+			{
+				name:"na21d",
+				points:"587"
 			},
 			{
 				name:"sb21",
-				points:"569"
+				points:"581"
 			},
 			{
 				name:"ek21a",
 				points:"564"
 			},
 			
-			{
-				name:"na21d",
-				points:"532"
-			},
 			{
 				name:"na21a",
 				points:"400"
@@ -102,7 +101,7 @@ block mainContent
 			},
 			{
 				name:"sb20",
-				points:"40"
+				points:"51"
 			},
 			{
 				name:"ek19b",
@@ -128,8 +127,9 @@ block mainContent
 				name.innerHTML = schoolClass.name
 				var line = document.createElement('div')
 				line.classList.add('line')
-				var lineWidth = schoolClass.points / highScore * 100
-				line.style.width = 'calc(' + lineWidth + '% - 140px)'
+				var lineWidth = schoolClass.points / highScore * 100;
+				var lineWidthOverflow = 140 * schoolClass.points / highScore;
+				line.style.width = 'calc(' + `${lineWidth}% - ${lineWidthOverflow}px`
 				var points = document.createElement('div')
 				points.classList.add('points')
 				points.innerHTML = schoolClass.points
