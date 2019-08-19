@@ -53,6 +53,10 @@ app.use(express.static('static'))
 const router = require('./routers/router.js')
 app.use(router)
 
+app.get('/vroguiden', (req, res) => {
+	res.redirect(301, 'https://app.famous.co/VROGuiden2019')
+})
+
 //Use db-functions
 const dbFunctions = require('./server-functions/db-functions.js')
 app.use(dbFunctions)
