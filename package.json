@@ -25,7 +25,7 @@
     "asyncawait": "^1.0.6",
     "body-parser": "^1.18.2",
     "convert-csv-to-json": "0.0.13",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "express-fileupload": "*",
     "express-busboy": "*",
     "firebase": "^4.11.0",
